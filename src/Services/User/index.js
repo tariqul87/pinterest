@@ -6,7 +6,9 @@ import Typography from "@material-ui/core/Typography";
 const User = (props) => {
   return (
     <Grid container spacing={1}>
-      <Typography variant="h2">This is User</Typography>
+      <Typography variant="h2" color="secondary">
+        This is User
+      </Typography>
     </Grid>
   );
 };
