@@ -1,17 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
+import { Route, Switch } from "react-router";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
+import { PersistGate } from "redux-persist/integration/react";
+import { createBrowserHistory } from "history";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// install setup components
+import setupStore from "./setupStore";
+import theme from "./setupTheme";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// import components
+import Dashboard from "./Services/Dashboard";
+import User from "./Services/User";
+
+const history = createBrowserHistory();
+const { store, persistor } = setupStore(history);
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <MuiThemeProvider theme={theme}>
+          <ConnectedRouter history={history}>
+            <Switch>
+              <Route path="/user/" component={User} />
+              <Route path="/" component={Dashboard} />
+            </Switch>
+          </ConnectedRouter>
+        </MuiThemeProvider>
+      </PersistGate>
+    </Provider>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
+serviceWorker.register();
