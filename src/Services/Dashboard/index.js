@@ -21,7 +21,7 @@ const Dashboard = (props) => {
 
   useEffect(initialize, []);
   return (
-    <Grid container spacing={2}>
+    <Grid container>
       <Typography variant="h2" color="primary" id="header">
         {text}
       </Typography>
