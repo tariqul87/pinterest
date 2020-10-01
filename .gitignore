@@ -6,6 +6,9 @@
 /.pnp
 .pnp.js
 
+# executables
+__pycache__/
+
 # testing
 /coverage
 

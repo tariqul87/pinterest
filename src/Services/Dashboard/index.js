@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+
+import { fetchTestData } from "../actions";
 
 const Dashboard = (props) => {
   const [text, setText] = useState("This is Dashboard");
@@ -11,6 +14,12 @@ const Dashboard = (props) => {
     setText("Text is now changed!");
   };
 
+  const initialize = () => {
+    console.log("asdf");
+    props.fetchTestData();
+  };
+
+  useEffect(initialize, []);
   return (
     <Grid container spacing={2}>
       <Typography variant="h2" color="primary" id="header">
@@ -30,4 +39,9 @@ const Dashboard = (props) => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = {
+  fetchTestData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
