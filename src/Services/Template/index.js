@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default (props) => {
+export default ({ children, ...props }) => {
   const classes = useStyles();
 
   return (
@@ -31,13 +31,18 @@ export default (props) => {
           <Typography variant="h6" className={classes.title}>
             Pinterest
           </Typography>
-          <Button color="inherit">Create Pin</Button>
-          <Button color="inherit">Home</Button>
+          <Button
+            color="inherit"
+            onClick={() => props.history.push("/create-pin")}
+          >
+            Create Pin
+          </Button>
+          <Button color="inherit" onClick={() => props.history.push("/")}>Home</Button>
           <Button color="inherit">Profile</Button>
         </Toolbar>
       </AppBar>
       <Grid container className={classes.container}>
-        {props.children}
+        {children}
       </Grid>
     </div>
   );

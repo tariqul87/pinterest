@@ -12,6 +12,7 @@ export default (history) => {
     {
       key: "app",
       storage: storage,
+      whitelist: [],
     },
     rootReducer(history)
   );
