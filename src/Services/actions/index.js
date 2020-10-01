@@ -12,3 +12,15 @@ export const fetchTestData = () => ({
     ],
   },
 });
+
+export const fetchAllPins = () => ({
+  [RSAA]: {
+    endpoint: "/api/pins/",
+    method: "GET",
+    types: [
+      constants.GET_ALL_PINS_REQUEST,
+      constants.GET_ALL_PINS_SUCCESS,
+      constants.GET_ALL_PINS_FAILURE,
+    ],
+  },
+});

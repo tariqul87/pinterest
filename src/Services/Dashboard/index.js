@@ -1,47 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 
-import { fetchTestData } from "../actions";
+import { fetchAllPins } from "../actions";
+import { getAllPins } from "../reducers";
+
+import Template from "../Template";
+import PinList from "../components/PinList";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingTop: theme.spacing(2),
+    width: "100%",
+  },
+}));
 
 const Dashboard = (props) => {
-  const [text, setText] = useState("This is Dashboard");
-
-  const changeTextButtonHandler = () => {
-    setText("Text is now changed!");
-  };
+  const [pins, setPins] = useState([]);
+  const classes = useStyles();
 
   const initialize = () => {
-    console.log("asdf");
-    props.fetchTestData();
+    props.fetchAllPins();
+  };
+
+  const updatePins = () => {
+    console.log(props.allPins);
+    setPins(props.allPins);
   };
 
   useEffect(initialize, []);
+  useEffect(updatePins, [props.allPins]);
   return (
-    <Grid container>
-      <Typography variant="h2" color="primary" id="header">
-        {text}
-      </Typography>
-      <Grid item xs={12}>
-        <Button
-          color="primary"
-          variant="outlined"
-          id="changeTextButton"
-          onClick={changeTextButtonHandler}
-        >
-          Test me!
-        </Button>
+    <Template {...props}>
+      <Grid container spacing={2} className={classes.container}>
+        <PinList pins={pins} />
       </Grid>
-    </Grid>
+    </Template>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  allPins: getAllPins(state),
+});
 const mapDispatchToProps = {
-  fetchTestData,
+  fetchAllPins,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
