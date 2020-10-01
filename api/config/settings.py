@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+ROOT_DIR = environ.Path(__file__) - 3
+API_DIR = ROOT_DIR.path('api')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -41,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'config',
-    'testapp'
+    'testapp',
+    'pinterest'
 ]
 
 MIDDLEWARE = [
@@ -131,6 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = API_DIR('media')
+MEDIA_URL = '/api/media/'
 
 # cors header settings
 CORS_ORIGIN_ALLOW_ALL = False
