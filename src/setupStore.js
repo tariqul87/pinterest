@@ -5,17 +5,19 @@ import { persistReducer, persistStore } from "redux-persist";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./Services/reducers";
 import thunk from "redux-thunk";
+import { apiMiddleware } from "redux-api-middleware";
 
 export default (history) => {
   const reducer = persistReducer(
     {
       key: "app",
       storage: storage,
+      whitelist: [],
     },
     rootReducer(history)
   );
 
-  const middlewares = [thunk, routerMiddleware(history)];
+  const middlewares = [thunk, apiMiddleware, routerMiddleware(history)];
 
   const devToolOptions = {};
 

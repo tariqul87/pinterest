@@ -1,0 +1,9 @@
+[
+  { "model": "pinterest.user", "pk": 1, "fields": { "name": "red imposter" } },
+  { "model": "pinterest.user", "pk": 2, "fields": { "name": "blue imposter" } },
+  {
+    "model": "pinterest.user",
+    "pk": 3,
+    "fields": { "name": "yellow imposter" }
+  }
+]

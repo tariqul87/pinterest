@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+ROOT_DIR = environ.Path(__file__) - 3
+API_DIR = ROOT_DIR.path('api')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -38,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
+    'config',
+    'testapp',
+    'pinterest'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +58,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 ROOT_URLCONF = 'config.urls'
 
@@ -122,7 +136,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#cors header settings
-CORS_ORIGIN_ALLOW_ALL = False
+MEDIA_ROOT = API_DIR('media')
+MEDIA_URL = '/api/media/'
 
+# cors header settings
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ('http://localhost:3000',)

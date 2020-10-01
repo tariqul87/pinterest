@@ -16,6 +16,7 @@ import theme from "./setupTheme";
 // import components
 import Dashboard from "./Services/Dashboard";
 import User from "./Services/User";
+import CreatePin from "./Services/CreatePin";
 
 const history = createBrowserHistory();
 const { store, persistor } = setupStore(history);
@@ -27,6 +28,7 @@ const App = () => {
         <MuiThemeProvider theme={theme}>
           <ConnectedRouter history={history}>
             <Switch>
+              <Route path="/create-pin/" component={CreatePin} />
               <Route path="/user/" component={User} />
               <Route path="/" component={Dashboard} />
             </Switch>
