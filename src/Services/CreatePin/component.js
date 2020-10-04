@@ -46,19 +46,15 @@ const CreatePinComponent = (props) => {
               <Button
                 color="secondary"
                 variant="contained"
-                onClick={() =>
-                  document.getElementById("create-pin-input").click()
-                }
+                onClick={props.imageButtonClickHandler}
               >
                 Upload Image
               </Button>
               <input
                 id="create-pin-input"
                 type="file"
-                onChange={(event) => {
-                  props.imageChangeListener(event.target.files[0]);
-                  event.target.value = "";
-                }}
+                ref={props.imageRef}
+                onChange={props.imageInputChangeHandler}
                 className={classes.hidden}
               />
             </Grid>

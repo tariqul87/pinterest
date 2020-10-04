@@ -55,7 +55,7 @@ class PinViewset(viewsets.ModelViewSet):
             return PinGetSerializer
         return PinCreateSerializer
 
-    queryset = Pin.objects.all()
+    queryset = Pin.objects.all().order_by('-time')
     permission_classes = (permissions.AllowAny, )
 
 
