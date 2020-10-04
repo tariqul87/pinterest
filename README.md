@@ -1,23 +1,21 @@
+### Pinterest
+
+Pinterest application to develop technical skill and use case analysis
+
 ### `Install dependencies`
 
 Go to project folder and add following commands
 
 ```
 python3 -m venv .venv
-source .venv/bin/active
+source .venv/bin/activate
 
 pip install -r api/requirements.txt
 
 python api/manage.py migrate
-
-npm install
 ```
 
-### `Start API server`
-
-python api/manage.py runserver
-
-### `Start App server`
+### `Start App server and app`
 
 npm start
 

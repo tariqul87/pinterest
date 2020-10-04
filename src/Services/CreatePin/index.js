@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 
@@ -15,6 +15,7 @@ const CreatePin = (props) => {
   const [tag, setTag] = useState("");
   const [description, setDescription] = useState("");
   const [user, setUser] = useState({});
+  const imageRef = useRef(null);
 
   const imageChangeListener = (file) => {
     const reader = new FileReader();
@@ -37,6 +38,15 @@ const CreatePin = (props) => {
     };
 
     props.createPin(pin);
+  };
+
+  const imageButtonClickHandler = () => {
+    imageRef.current.click();
+  };
+
+  const imageInputChangeHandler = (event) => {
+    imageChangeListener(event.target.files[0]);
+    event.target.value = "";
   };
 
   const updateUser = () => {
@@ -63,6 +73,9 @@ const CreatePin = (props) => {
           setDescription,
           imageChangeListener,
           createPin,
+          imageRef,
+          imageButtonClickHandler,
+          imageInputChangeHandler,
         }}
         tags={props.tags}
         isPinCreated={!_.isEmpty(props.pin)}
